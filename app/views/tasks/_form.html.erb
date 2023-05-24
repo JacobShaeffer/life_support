@@ -1,0 +1,42 @@
+<%= form_with(model: task) do |form| %>
+  <% if task.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+      <ul>
+        <% task.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :zone_id, style: "display: block" %>
+    <%= form.text_field :zone_id %>
+  </div>
+
+  <div>
+    <%= form.label :inspection_period, style: "display: block" %>
+    <%= form.number_field :inspection_period %>
+  </div>
+
+  <div>
+    <%= form.label :inspected_on, style: "display: block" %>
+    <%= form.datetime_field :inspected_on %>
+  </div>
+
+  <div>
+    <%= form.label :snooze_duration, style: "display: block" %>
+    <%= form.number_field :snooze_duration %>
+  </div>
+
+  <div>
+    <%= form.label :snoozed_on, style: "display: block" %>
+    <%= form.datetime_field :snoozed_on %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

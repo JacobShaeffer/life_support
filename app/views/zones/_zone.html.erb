@@ -1,0 +1,14 @@
+<div id="<%= dom_id zone %>">
+  <p>
+    <strong>Zone:</strong>
+
+		<% if @theme == 'basic'%>
+			<%= zone.name_basic%>
+		<% elsif @theme == 'fantasy'	%>
+			<%= zone.name_fantasy %>
+		<% elsif @theme == 'scifi' %>
+			<%= zone.name_scifi %>
+		<% end %>
+  </p>
+
+</div>

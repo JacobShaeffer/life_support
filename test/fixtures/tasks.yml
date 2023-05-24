@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  zone: one
+  inspection_period: 1
+  inspected_on: 2023-05-05 20:38:08
+  snooze_duration: 1
+  snoozed_on: 2023-05-05 20:38:08
+
+two:
+  zone: two
+  inspection_period: 1
+  inspected_on: 2023-05-05 20:38:08
+  snooze_duration: 1
+  snoozed_on: 2023-05-05 20:38:08
