@@ -1,4 +1,4 @@
-<%= form_with(model: zone) do |form| %>
+<%= bootstrap_form_with(model: zone) do |form| %>
   <% if zone.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(zone.errors.count, "error") %> prohibited this zone from being saved:</h2>
@@ -12,18 +12,12 @@
   <% end %>
 
   <div>
-    <%= form.label :name_basic, style: "display: block" %>
-    <%= form.text_field :name_basic %>
+    <%= form.text_field :name %>
   </div>
 
   <div>
-    <%= form.label :name_fantasy, style: "display: block" %>
-    <%= form.text_field :name_fantasy %>
-  </div>
-
-  <div>
-    <%= form.label :name_scifi, style: "display: block" %>
-    <%= form.text_field :name_scifi %>
+		<%= form.label "Parent"%>
+    <%= form.collection_select :parent_id, Zone.all, :id, :name, {:include_blank => "None", skip_label: true} %>
   </div>
 
   <div>

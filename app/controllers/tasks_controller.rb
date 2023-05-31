@@ -21,7 +21,15 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
-    @task = Task.new(task_params)
+		total_hours = (params[:task][:Weeks].to_i * 24 * 7) + (params[:task][:Days].to_i * 24) + params[:task][:Hours].to_i
+		now = Time.now
+		zone = Zone.find(params[:task][:zone_id])
+		@task = Task.new(zone: zone, 
+										inspection_period: total_hours, 
+										name: params[:task][:name], 
+										inspected_on: Time.new(now.year, now.month, now.day, 12, 0, 0)
+		)
+    # @task = Task.new(task_params)
 
     respond_to do |format|
       if @task.save
@@ -65,6 +73,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:zone_id, :inspection_period, :inspected_on, :snooze_duration, :snoozed_on)
+      params.require(:task).permit(:zone_id, :weeks, :days, :hours)
     end
 end

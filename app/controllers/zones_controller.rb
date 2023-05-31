@@ -1,6 +1,5 @@
 class ZonesController < ApplicationController
   before_action :set_zone, only: %i[ show edit update destroy ]
-	before_action :set_theme, only: %i[ show index ]
 
   # GET /zones or /zones.json
   def index
@@ -23,7 +22,7 @@ class ZonesController < ApplicationController
 
   # POST /zones or /zones.json
   def create
-    @zone = Zone.new(zone_params)
+    @zone = Zone.new(name: params[:zone][:name], zone_id: params[:zone][:parent_id])
 
     respond_to do |format|
       if @zone.save
@@ -65,12 +64,8 @@ class ZonesController < ApplicationController
       @zone = Zone.find(params[:id])
     end
 
-		def set_theme
-			@theme = Config.find_by(name: 'theme').value
-		end
-
     # Only allow a list of trusted parameters through.
     def zone_params
-      params.permit(:zone_id, :name_basic, :name_fantasy, :name_scifi)
+      params.require(:zone).permit(:name, :parent_id)
     end
 end
