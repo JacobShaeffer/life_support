@@ -21,7 +21,8 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
-		total_hours = (params[:task][:Weeks].to_i * 24 * 7) + (params[:task][:Days].to_i * 24) + params[:task][:Hours].to_i
+		#TODO: This is a hack.  I need to figure out how to do this properly.
+		total_hours = (params[:task][:Weeks].to_i * 24 * 7) + (params[:task][:Days].to_i * 24) + (params[:task][:Months].to_i * 24 * 30)
 		now = Time.now
 		zone = Zone.find(params[:task][:zone_id])
 		@task = Task.new(zone: zone, 
@@ -73,6 +74,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:zone_id, :weeks, :days, :hours)
+      params.require(:task).permit(:zone_id, :months, :weeks, :days)
     end
 end
