@@ -2,18 +2,7 @@
 	<div class="card-body">
 		<h5 class="card-title">
 			<%= task.name %>
-			<%= link_to "Edit", edit_task_path(task.id)%>
 		</h5>
-
-		<p>
-			<strong>Inspection period:</strong>
-			<%= task.inspection_period %> Days
-		</p>
-
-		<p>
-			<strong>Inspected on:</strong>
-			<%= task.inspected_on.strftime('%b %e') %>
-		</p>
 
 		<div class="progress">
 			<% 
@@ -25,13 +14,45 @@
 					else 'bg-danger'
 				end
 			%>
-			<div class="progress-bar <%= color %>" role="progressbar" style="width: <%= progress %>%" aria-valuenow="<%= progress %>" aria-valuemin="0" aria-valuemax="100"><%= progress %>%</div>
+			<div class="progress-bar <%= color %>" role="progressbar" style="width: <%= progress %>%" aria-valuenow="<%= progress %>" aria-valuemin="0" aria-valuemax="100"><%= days_to_inspection %> days</div>
 		</div>
 
-		<%#= button_to "inspect", { action: "inspect", id: task.id, method: :post} %>
-		<%= button_to [:inspect, task], method: :post do%>
-			Inspect
-		<% end %>
+
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+			Launch demo modal
+		</button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>
+							<strong>Inspection period:</strong>
+							<%= task.inspection_period %> Days
+						</p>
+
+						<p>
+							<strong>Last Inspected on:</strong>
+							<%= task.inspected_on.strftime('%b %e') %>
+						</p>
+						<%= button_to [:inspect, task], method: :post, class: "btn btn-success" do%>
+							Inspect
+						<% end %>
+						<%= link_to "Edit", edit_task_path(task.id)%>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary left" data-bs-dismiss="modal">Edit</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 <!--		<p>
 			<strong>Snooze duration:</strong>
