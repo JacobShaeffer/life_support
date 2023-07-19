@@ -3,11 +3,12 @@ class ZonesController < ApplicationController
 
   # GET /zones or /zones.json
   def index
-    @zones = Zone.all
+    @zones = Zone.where(zone_id: nil)
   end
 
   # GET /zones/1 or /zones/1.json
   def show
+		@zones = Zone.where(zone_id: @zone.id)
   end
 
   # GET /zones/new

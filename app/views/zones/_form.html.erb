@@ -15,10 +15,10 @@
     <%= form.text_field :name %>
   </div>
 
-  <div>
-		<%= form.label "Parent"%>
-    <%= form.collection_select :parent_id, Zone.all, :id, :name, {:include_blank => "None", skip_label: true} %>
-  </div>
+<!--  <div>-->
+		<%#= form.label "Parent"%>
+    <%#= form.collection_select :parent_id, Zone.all, :id, :name, {:include_blank => "None", skip_label: true} %>
+<!--  </div>-->
 
   <div>
     <%= form.submit %>

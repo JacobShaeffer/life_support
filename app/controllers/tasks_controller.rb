@@ -2,39 +2,41 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
 
   # GET /tasks or /tasks.json
-  def index
-    @tasks = Task.all
-  end
+  # def index
+  #   @tasks = Task.all
+  # end
 
   # GET /tasks/1 or /tasks/1.json
-  def show
-  end
+  # def show
+  # end
 
   # GET /tasks/new
   def new
+		@zone = Zone.find(params[:zone_id])
     @task = Task.new
   end
 
   # GET /tasks/1/edit
   def edit
+		@zone = @task.zone
   end
 
   # POST /tasks or /tasks.json
   def create
 		#TODO: This is a hack.  I need to figure out how to do this properly.
-		total_hours = (params[:task][:Weeks].to_i * 24 * 7) + (params[:task][:Days].to_i * 24) + (params[:task][:Months].to_i * 24 * 30)
-		now = Time.now
+		total_days = (params[:task][:Weeks].to_i * 7) + (params[:task][:Days].to_i) + (params[:task][:Months].to_i * 30)
 		zone = Zone.find(params[:task][:zone_id])
 		@task = Task.new(zone: zone, 
-										inspection_period: total_hours, 
+										inspection_period: total_days, 
 										name: params[:task][:name], 
-										inspected_on: Time.new(now.year, now.month, now.day, 12, 0, 0)
+										# inspected_on: Date.today.advance(days: -(total_days.to_f * 0.1).to_i)
+										inspected_on: Date.today
 		)
     # @task = Task.new(task_params)
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to task_url(@task), notice: "Task was successfully created." }
+        format.html { redirect_to zone_url(@task.zone_id), notice: "Task was successfully created." }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -47,7 +49,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to task_url(@task), notice: "Task was successfully updated." }
+        format.html { redirect_to zone_url(@task.zone), notice: "Task was successfully updated." }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -65,6 +67,35 @@ class TasksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+	def inspect
+		@task = Task.find(params[:id])
+		@task.inspected_on = Date.today
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to zone_url(@task.zone_id), notice: "Task was successfully inspected." }
+        format.json { render :show, status: :created, location: @task }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
+	end
+
+	def snooze
+		@task = Task.find(params[:id])
+		snooze_days = params[:snooze_days].to_i
+		@task.snoozed_until = Date.today.advance(days: snooze_days)
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to zone_url(@task.zone_id), notice: "Task was successfully inspected." }
+        format.json { render :show, status: :created, location: @task }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
+	end
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -1,10 +1,22 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @zone %>
+<div class="d-flex">
+	<h1><%= @zone.name %></h1>
+	<%= link_to "Edit", edit_zone_path(@zone), class: 'mt-auto mb-auto ms-3' %>
+</div>
 
-<div>
-  <%= link_to "Edit this zone", edit_zone_path(@zone) %> |
-  <%= link_to "Back to zones", zones_path %>
+<%= render 'tasks/task_list' %>
 
-  <%= button_to "Destroy this zone", @zone, method: :delete %>
+<div class="mt-3">
+	<%= link_to "New task", new_task_path(zone_id: @zone.id) %>
+</div>
+<%#= render 'zone_list' %>
+
+<div class="mt-3">
+	<% if @zone.zone_id %>
+  	<%= link_to "Back", zone_path(@zone.zone_id) %>
+	<% else %>
+		<%= link_to "Back", zones_path %>
+	<% end %>
+  <%#= button_to "Destroy this zone", @zone, method: :delete %>
 </div>

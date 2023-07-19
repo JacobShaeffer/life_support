@@ -10,19 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_31_045026) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_05_044237) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "tasks", force: :cascade do |t|
     t.bigint "zone_id", null: false
     t.integer "inspection_period"
-    t.datetime "inspected_on"
-    t.integer "snooze_duration"
-    t.datetime "snoozed_on"
+    t.date "inspected_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.date "snoozed_until"
     t.index ["zone_id"], name: "index_tasks_on_zone_id"
   end
 

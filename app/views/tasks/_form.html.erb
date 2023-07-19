@@ -16,7 +16,8 @@
 	</div>
 
   <div>
-    <%= form.collection_select :zone_id, Zone.all, :id, :name %>
+		<%= form.hidden_field :zone_id, value: @zone.id %>
+    <%#= form.collection_select :zone_id, Zone.all, :id, :name %>
   </div>
 
 	<div class="row">

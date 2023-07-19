@@ -1,7 +1,11 @@
-<div id="<%= dom_id zone %>">
-  <p>
-    <strong>Zone:</strong>
-		<%= zone.name %>
-  </p>
-
+<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-6">
+	<div id="<%= dom_id zone %>" class="card">
+		<div class="card-body">
+			<h5 class="card-title"><%= zone.name %></h5>
+			<p class="card-text"><%= Task.where(zone_id: zone.id).count() %></p>
+			<p>
+				<%= link_to "Show this zone", zone, class: 'btn btn-primary' %>
+			</p>
+		</div>
+	</div>
 </div>
