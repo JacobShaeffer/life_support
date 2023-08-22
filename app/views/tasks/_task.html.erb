@@ -1,67 +1,32 @@
-<div id="<%= dom_id task %>" class="card">
-	<div class="card-body">
-		<h5 class="card-title">
-			<%= task.name %>
-		</h5>
 
-		<div class="progress">
-			<% 
-				days_to_inspection = (task.inspected_on.advance(:days => task.inspection_period) - Date.today).to_i 
-				progress = 100 - (days_to_inspection.to_f / task.inspection_period.to_f * 100).to_i	
-				color = case progress
-					when 0..75 then 'bg-primary'
-					when 76..99 then 'bg-warning'
-					else 'bg-danger'
-				end
-			%>
-			<div class="progress-bar <%= color %>" role="progressbar" style="width: <%= progress %>%" aria-valuenow="<%= progress %>" aria-valuemin="0" aria-valuemax="100"><%= days_to_inspection %> days</div>
-		</div>
+<div class="col-12" style="width: 360px;">
+	<div id="<%= dom_id task %>" class="mb-1">
+		<div class="" style="border: 1px solid black; display: flex;">
 
-
-		<!-- Button trigger modal -->
-		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-			Launch demo modal
-		</button>
-
-		<!-- Modal -->
-		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<p>
-							<strong>Inspection period:</strong>
-							<%= task.inspection_period %> Days
-						</p>
-
-						<p>
-							<strong>Last Inspected on:</strong>
-							<%= task.inspected_on.strftime('%b %e') %>
-						</p>
-						<%= button_to [:inspect, task], method: :post, class: "btn btn-success" do%>
-							Inspect
-						<% end %>
-						<%= link_to "Edit", edit_task_path(task.id)%>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-primary left" data-bs-dismiss="modal">Edit</button>
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-					</div>
-				</div>
+			<!--<i class="bi bi-<%#= task.zone.icon%> fs-1" style="text-align: end; line-height: 0;"></i>-->
+			<div style="height: 66px; width: 66px; border: 4px solid black; border-radius: 100%; padding-top: 13px; padding-left: 13px;">
+				<% if task.icon %>
+					<i class="fa-solid fa-<%= task.icon %> fa-2xl"></i>
+				<% else %>
+					<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="" viewBox="0 0 16 16" style="height: auto;">
+						<path d="M4 4.5a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1v.5h4.14l.386-1.158A.5.5 0 0 1 11 4h1a.5.5 0 0 1 0 1h-.64l-.311.935.807 1.29a3 3 0 1 1-.848.53l-.508-.812-2.076 3.322A.5.5 0 0 1 8 10.5H5.959a3 3 0 1 1-1.815-3.274L5 5.856V5h-.5a.5.5 0 0 1-.5-.5zm1.5 2.443-.508.814c.5.444.85 1.054.967 1.743h1.139L5.5 6.943zM8 9.057 9.598 6.5H6.402L8 9.057zM4.937 9.5a1.997 1.997 0 0 0-.487-.877l-.548.877h1.035zM3.603 8.092A2 2 0 1 0 4.937 10.5H3a.5.5 0 0 1-.424-.765l1.027-1.643zm7.947.53a2 2 0 1 0 .848-.53l1.026 1.643a.5.5 0 1 1-.848.53L11.55 8.623z"/>
+					</svg>
+				<% end %>
 			</div>
+
+			<div style="flex: 1;">
+				<%= render 'tasks/progress', task: task%>
+
+				<h4 class="" style="flex: 4; margin: auto; background-color: <%= task.zone.color %>;>">
+					<%= task.name %>
+				</h4>
+			</div>
+
 		</div>
+			<!-- make entire card clickable -->
+			<!--<a href="#" class="stretched-link" data-bs-toggle="modal" data-bs-target="#exampleModal"></a>-->
 
-<!--		<p>
-			<strong>Snooze duration:</strong>
-			<%#= task.snooze_duration %>-->
-<!--		</p>
-
-		<p>
-			<strong>Snoozed on:</strong>
-			<%#= task.snoozed_on %>-->
-<!--		</p>-->
+			<!-- Modal -->
+			<%= render 'tasks/modal', task: task%>
 	</div>
 </div>

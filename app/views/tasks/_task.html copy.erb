@@ -1,0 +1,20 @@
+<div id="<%= dom_id task %>" class="card mb-1">
+	<div class="card-body">
+
+		<div style="display: flex; margin-bottom: 3px;">
+			<h5 class="card-title" style="flex: 4; margin: auto;">
+				<%= task.name %>
+			</h5>
+
+			<i class="bi bi-<%= task.zone.icon%> fs-1" style="flex: 1; text-align: end; line-height: 0;"></i>
+		</div>
+
+		<%= render 'tasks/progress', task: task%>
+
+	</div>
+		<!-- make entire card clickable -->
+		<a href="#" class="stretched-link" data-bs-toggle="modal" data-bs-target="#exampleModal"></a>
+
+		<!-- Modal -->
+		<%= render 'tasks/modal', task: task%>
+</div>

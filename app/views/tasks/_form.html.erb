@@ -32,6 +32,18 @@
 		</div>
 	</div>
 
+	<div>
+		<%= form.text_field :icon, required: true %>
+	</div>
+
+	<div>
+		<%= form.number_field :alert, append: "days before", required: true %>
+	</div>
+
+	<div>
+		<%= form.date_field :offset %>
+	</div>
+
 <!--  <div>-->
     <%#= form.number_field :inspection_period %>
 <!--  </div>-->

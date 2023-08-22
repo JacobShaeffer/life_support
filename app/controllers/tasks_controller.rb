@@ -2,9 +2,9 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
 
   # GET /tasks or /tasks.json
-  # def index
-  #   @tasks = Task.all
-  # end
+  def index
+    @tasks = Task.all
+  end
 
   # GET /tasks/1 or /tasks/1.json
   # def show
@@ -25,12 +25,16 @@ class TasksController < ApplicationController
   def create
 		#TODO: This is a hack.  I need to figure out how to do this properly.
 		total_days = (params[:task][:Weeks].to_i * 7) + (params[:task][:Days].to_i) + (params[:task][:Months].to_i * 30)
+		inspected_on = Date.parse(params[:task][:offset])
 		zone = Zone.find(params[:task][:zone_id])
 		@task = Task.new(zone: zone, 
 										inspection_period: total_days, 
 										name: params[:task][:name], 
 										# inspected_on: Date.today.advance(days: -(total_days.to_f * 0.1).to_i)
-										inspected_on: Date.today
+										# inspected_on: Date.today.advance(days: (params[:task][:offset].to_i)),
+										inspected_on: inspected_on,
+										icon: params[:task][:icon],
+										alert: params[:task][:alert]
 		)
     # @task = Task.new(task_params)
 
@@ -105,6 +109,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:zone_id, :months, :weeks, :days)
+      params.require(:task).permit(:zone_id, :months, :weeks, :days, :icon, :alert, :offset)
     end
 end

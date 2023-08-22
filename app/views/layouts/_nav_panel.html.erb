@@ -1,0 +1,33 @@
+
+<button class="btn btn-secondary" style="float: right;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+  Nav-Panel
+</button>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div>
+			<%= link_to "Home", home_index_path %>
+			<%= link_to "Tasks", tasks_path %>
+			<%= link_to "Zones", zones_path %>
+    </div>
+  </div>
+</div>
+
+<!--<div class="collapse" id="navbarToggleExternalContent">
+  <div class="p-4">
+		<%#= link_to "Home", home_index_path %>-->
+		<%#= link_to "Tasks", tasks_path %>
+		<%#= link_to "Zones", zones_path %>
+<!--  </div>
+</div>
+<nav class="navbar">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>-->

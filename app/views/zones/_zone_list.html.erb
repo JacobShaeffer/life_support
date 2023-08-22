@@ -1,5 +1,8 @@
 <div id="zones" class="row gy-4">
-  <% @zones.each do |zone| %>
-    <%= render zone %>
+  <% @zones.each_slice(2) do |zone1, zone2| %>
+    <%= render zone1 %>
+		<% if zone2 %>
+			<%= render zone2 %>
+		<% end %>
   <% end %>
 </div>

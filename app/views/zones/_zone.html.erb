@@ -1,11 +1,17 @@
 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-6">
-	<div id="<%= dom_id zone %>" class="card">
+	<div id="<%= dom_id zone %>" class="card" style="background-color: <%= zone.color %>">
 		<div class="card-body">
-			<h5 class="card-title"><%= zone.name %></h5>
+			<div style="display: flex;">
+				<h5 class="card-title"><%= zone.name %></h5>
+				<!--<i class="bi bi-<%#= zone.icon%> fs-1" style="flex: 1; text-align: end; line-height: 0;"></i>-->
+			</div>
+
 			<p class="card-text"><%= Task.where(zone_id: zone.id).count() %></p>
-			<p>
-				<%= link_to "Show this zone", zone, class: 'btn btn-primary' %>
-			</p>
+<!--			<p>-->
+				<%#= link_to "Show this zone", zone, class: 'btn btn-primary stretched-link' %>
+<!--			</p>-->
+			<!--<a href="#" class="stretched-link">-->
+			<%= link_to "", zone, class: 'stretched-link' %>
 		</div>
 	</div>
 </div>

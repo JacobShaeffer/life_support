@@ -1,7 +1,8 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Zones</h1>
-
+<div>
+	<h1 class="mt-3" style="display: inline-block;">Zones</h1>
+	<%= link_to "New zone", new_zone_path, class: "btn btn-primary", style: "margin-bottom: 20px; margin-left: 20px;" %>
+</div>
 <%= render 'zone_list' %>
 
-<%= link_to "New zone", new_zone_path %>

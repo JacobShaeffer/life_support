@@ -1,0 +1,20 @@
+<% 
+	days_to_inspection = (task.inspected_on.advance(:days => task.inspection_period) - Date.today).to_i 
+	progress = 100 - (days_to_inspection.to_f / task.inspection_period.to_f * 100).to_i	
+	color = case progress
+		when 0..75 then 'bg-primary'
+		when 76..99 then 'bg-warning'
+		else 'bg-danger'
+	end
+%>
+<div style="font-size: 0.8125rem;"><%= days_to_inspection %> days remaining</div>
+<div class="progress">
+	<div 
+		class="progress-bar <%= color %>" 
+		role="progressbar" 
+		style="width: <%= progress %>%" 
+		aria-valuenow="<%= progress %>" 
+		aria-valuemin="0" 
+		aria-valuemax="100">
+	</div>
+</div>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'home/index'
   resources :tasks do
 		member do
 			post :inspect
@@ -11,5 +12,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-	root "zones#index"
+	root "home#index"
 end

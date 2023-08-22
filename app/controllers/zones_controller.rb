@@ -15,6 +15,30 @@ class ZonesController < ApplicationController
   def new
     @zone = Zone.new
 		@zones = Zone.all
+		@icons = [
+			"airplane",
+			"airplane-engines",
+			"airplane-engines-fill",
+			"airplane-fill",
+			"alarm",
+			"alarm-fill",
+			"alexa",
+			"align-bottom",
+			"align-center",
+			"align-end",
+			"align-middle",
+			"align-start",
+			"align-top",
+			"alipay",
+			"alt",
+			"amd",
+			"android",
+			"android2",
+			"app",
+			"app-indicator",
+			"apple",
+			"archive",
+		]
   end
 
   # GET /zones/1/edit
@@ -23,7 +47,7 @@ class ZonesController < ApplicationController
 
   # POST /zones or /zones.json
   def create
-    @zone = Zone.new(name: params[:zone][:name], zone_id: params[:zone][:parent_id])
+    @zone = Zone.new(name: params[:zone][:name], zone_id: params[:zone][:parent_id], color: params[:zone][:color])
 
     respond_to do |format|
       if @zone.save
@@ -67,6 +91,6 @@ class ZonesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def zone_params
-      params.require(:zone).permit(:name, :parent_id)
+      params.require(:zone).permit(:name, :parent_id, :color)
     end
 end
