@@ -20,6 +20,7 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: localhost
   username: <%= ENV["LIFE_SUPPORT_DATABASE_USERNAME"] %>
   # echo 'export LIFESUPPORT_DATABASE_USERNAME="PostgreSQL_Role_username"' >> ~/.bashrc
   # echo 'export LIFESUPPORT_DATABASE_PASSWORD="PostgreSQL_Role_Password"' >> ~/.bashrc
