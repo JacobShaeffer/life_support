@@ -75,3 +75,4 @@ group :test do
 end
 
 gem 'bootstrap_form', '~> 5.2'
+gem 'passenger', '~> 6.0', '>= 6.0.18'
